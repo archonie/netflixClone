@@ -18,6 +18,10 @@
 		71EA6ED02CFBD07300371A58 /* DownloadViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71EA6ECF2CFBD07300371A58 /* DownloadViewController.swift */; };
 		71EA6ED72CFBD5C700371A58 /* CollectionViewTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71EA6ED62CFBD5C700371A58 /* CollectionViewTableViewCell.swift */; };
 		71EA6ED92CFBD94A00371A58 /* HeroHeaderUIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71EA6ED82CFBD94A00371A58 /* HeroHeaderUIView.swift */; };
+		71EA6EDB2CFC826000371A58 /* APICaller.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71EA6EDA2CFC825D00371A58 /* APICaller.swift */; };
+		71EA6EDD2CFC828300371A58 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71EA6EDC2CFC828100371A58 /* Constants.swift */; };
+		71EA6EDF2CFC868700371A58 /* Movie.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71EA6EDE2CFC867F00371A58 /* Movie.swift */; };
+		71EA6EE12CFC885F00371A58 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71EA6EE02CFC885B00371A58 /* Extensions.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -34,6 +38,10 @@
 		71EA6ECF2CFBD07300371A58 /* DownloadViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DownloadViewController.swift; sourceTree = "<group>"; };
 		71EA6ED62CFBD5C700371A58 /* CollectionViewTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionViewTableViewCell.swift; sourceTree = "<group>"; };
 		71EA6ED82CFBD94A00371A58 /* HeroHeaderUIView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeroHeaderUIView.swift; sourceTree = "<group>"; };
+		71EA6EDA2CFC825D00371A58 /* APICaller.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APICaller.swift; sourceTree = "<group>"; };
+		71EA6EDC2CFC828100371A58 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
+		71EA6EDE2CFC867F00371A58 /* Movie.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Movie.swift; sourceTree = "<group>"; };
+		71EA6EE02CFC885B00371A58 /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -112,6 +120,7 @@
 		71EA6ED32CFBD56F00371A58 /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				71EA6EDE2CFC867F00371A58 /* Movie.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -119,6 +128,8 @@
 		71EA6ED42CFBD59600371A58 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				71EA6EE02CFC885B00371A58 /* Extensions.swift */,
+				71EA6EDC2CFC828100371A58 /* Constants.swift */,
 			);
 			path = Resources;
 			sourceTree = "<group>";
@@ -126,6 +137,7 @@
 		71EA6ED52CFBD5A100371A58 /* Managers */ = {
 			isa = PBXGroup;
 			children = (
+				71EA6EDA2CFC825D00371A58 /* APICaller.swift */,
 			);
 			path = Managers;
 			sourceTree = "<group>";
@@ -204,10 +216,14 @@
 			buildActionMask = 2147483647;
 			files = (
 				71EA6ECD2CFBD04C00371A58 /* SearchViewController.swift in Sources */,
+				71EA6EDD2CFC828300371A58 /* Constants.swift in Sources */,
+				71EA6EDF2CFC868700371A58 /* Movie.swift in Sources */,
 				71EA6EC02CFBCEAF00371A58 /* AppDelegate.swift in Sources */,
 				71EA6ED72CFBD5C700371A58 /* CollectionViewTableViewCell.swift in Sources */,
+				71EA6EDB2CFC826000371A58 /* APICaller.swift in Sources */,
 				71EA6ED92CFBD94A00371A58 /* HeroHeaderUIView.swift in Sources */,
 				71EA6EC12CFBCEAF00371A58 /* SceneDelegate.swift in Sources */,
+				71EA6EE12CFC885F00371A58 /* Extensions.swift in Sources */,
 				71EA6ED02CFBD07300371A58 /* DownloadViewController.swift in Sources */,
 				71EA6EC22CFBCEAF00371A58 /* MainTabBarViewController.swift in Sources */,
 				71EA6ECB2CFBD02D00371A58 /* UpcomingViewController.swift in Sources */,
