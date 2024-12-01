@@ -36,7 +36,7 @@ class HomeViewController: UIViewController {
         let headerView = HeroHeaderUIView(frame: CGRect(x: 0, y: 0, width: view.bounds.width, height: 450))
         homeFeedView.tableHeaderView = headerView
         
-        getTrendingMovies()
+        fetchData()
     }
     
     override func viewDidLayoutSubviews() {
@@ -68,18 +68,42 @@ class HomeViewController: UIViewController {
         }
     }
     
-    private func getTrendingMovies() {
-        APICaller.shared.getTrendingMovies { result in
+    private func fetchData() {
+//        APICaller.shared.getTrendingMovies { result in
+//            switch result {
+//            case .success(let movies):
+//                print(movies)
+//            case .failure(let error):
+//                print(error.localizedDescription)
+//            }
+//        }
+        
+//        APICaller.shared.getTrendingTvs { results in
+//            
+//        }
+        
+//        APICaller.shared.getUpcomingMovies { result in
+//            
+//        }
+        
+//        APICaller.shared.getPopular { result in
+//            switch result {
+//            case .success(let success):
+//                print(success)
+//            case .failure(let failure):
+//                print(failure)
+//            }
+//        }
+        
+        APICaller.shared.getTopRated { result in
             switch result {
-            case .success(let movies):
-                print(movies)
-            case .failure(let error):
-                print(error.localizedDescription)
+            case .success(let success):
+                print(success)
+            case .failure(let failure):
+                print(failure)
             }
         }
     }
-
-
 }
 
 extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
