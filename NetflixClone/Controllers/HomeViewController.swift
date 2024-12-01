@@ -22,13 +22,41 @@ class HomeViewController: UIViewController {
         homeFeedView.dataSource = self
         homeFeedView.delegate = self
         
-        homeFeedView.tableHeaderView = UIView(frame: CGRect(x: 0, y: 0, width: view.bounds.width, height: 450))
+        configureNavbar()
+        
+        let headerView = HeroHeaderUIView(frame: CGRect(x: 0, y: 0, width: view.bounds.width, height: 450))
+        homeFeedView.tableHeaderView = headerView
     }
     
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         homeFeedView.frame = view.bounds
     }
+
+    private func configureNavbar() {
+        if let logoImage = UIImage(named: "netflixLogo") {
+            let resizedImage = resizeImage(image: logoImage, targetSize: CGSize(width: 28, height: 30))
+            navigationItem.leftBarButtonItem = UIBarButtonItem(image: resizedImage.withRenderingMode(.alwaysOriginal), style: .done, target: self, action: nil)
+        }
+
+        let personImage = UIImage(systemName: "person")?.withRenderingMode(.alwaysOriginal)
+        let playImage = UIImage(systemName: "play.rectangle")?.withRenderingMode(.alwaysOriginal)
+
+        navigationItem.rightBarButtonItems = [
+            UIBarButtonItem(image: personImage, style: .done, target: self, action: nil),
+            UIBarButtonItem(image: playImage, style: .done, target: self, action: nil)
+        ]
+
+        navigationController?.navigationBar.tintColor = .label
+    }
+    
+    private func resizeImage(image: UIImage, targetSize: CGSize) -> UIImage {
+        let renderer = UIGraphicsImageRenderer(size: targetSize)
+        return renderer.image { _ in
+            image.draw(in: CGRect(origin: .zero, size: targetSize))
+        }
+    }
+
 
 }
 
@@ -59,5 +87,12 @@ extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         return 40
+    }
+    
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        let defaultOffset = view.safeAreaInsets.top
+        let offset = scrollView.contentOffset.y + defaultOffset
+        
+        navigationController?.navigationBar.transform = .init(translationX: 0, y: min(0, -offset))
     }
 }
