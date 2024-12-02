@@ -75,6 +75,13 @@ class TitleTableViewCell: UITableViewCell {
         NSLayoutConstraint.activate(playButtonConstraints)
     }
     
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        titleLabel.text = nil
+        titlePosterImageView.image = nil
+        
+    }
+    
     public func configure(with model: TitleViewModel) {
         guard let url = URL(string: "https://image.tmdb.org/t/p/w500\(model.posterURL)") else {
             return
@@ -82,5 +89,7 @@ class TitleTableViewCell: UITableViewCell {
         titlePosterImageView.sd_setImage(with: url)
         titleLabel.text = model.titleName
     }
+    
+    
     
 }
