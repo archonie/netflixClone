@@ -18,6 +18,9 @@ enum Sections: Int {
 
 class HomeViewController: UIViewController {
     
+    private var randomTrendingMovie: Title?
+    
+    private var header: HeroHeaderUIView?
     
     let sectionTitles: [String] = [
         "Trending Movies",
@@ -42,9 +45,9 @@ class HomeViewController: UIViewController {
         
         configureNavbar()
         
-        let headerView = HeroHeaderUIView(frame: CGRect(x: 0, y: 0, width: view.bounds.width, height: 450))
-        homeFeedView.tableHeaderView = headerView
-        
+        header = HeroHeaderUIView(frame: CGRect(x: 0, y: 0, width: view.bounds.width, height: 450))
+        homeFeedView.tableHeaderView = header
+        configureHeaderView()
     }
     
     override func viewDidLayoutSubviews() {
@@ -52,6 +55,22 @@ class HomeViewController: UIViewController {
         homeFeedView.frame = view.bounds
     }
 
+    private func configureHeaderView() {
+        APICaller.shared.getTrendingMovies { [weak self] result in
+            switch result {
+            case .success(let titles):
+                guard let selected = titles.randomElement() else {
+                    return
+                }
+                self?.randomTrendingMovie = selected
+                self?.header?.configure(with: TitleViewModel(titleName: selected.original_name ?? selected.original_title ?? "Unknown", posterURL: selected.poster_path ?? ""))
+            case .failure(let error):
+                print(error.localizedDescription)
+            }
+        }
+        
+    }
+    
     private func configureNavbar() {
         if let logoImage = UIImage(named: "netflixLogo") {
             let resizedImage = resizeImage(image: logoImage, targetSize: CGSize(width: 28, height: 30))
@@ -180,8 +199,9 @@ extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
 extension HomeViewController: CollectionViewTableViewCellDelegate {
     func collectionViewTableViewCellDidTapCell(_ cell: CollectionViewTableViewCell, viewModel: TitlePreviewViewModel) {
         DispatchQueue.main.async { [weak self] in
-            let vc = TitlePreviewViewController()
-            vc.configure(with: viewModel)
+            let vc = TitlePreviewViewController(model: viewModel)
+            vc.navigationItem.largeTitleDisplayMode = .never
+            vc.title = viewModel.title
             self?.navigationController?.pushViewController(vc, animated: true)
         }
     }
