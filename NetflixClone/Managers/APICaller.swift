@@ -184,7 +184,7 @@ class APICaller {
                 guard let videoElement = results.items.first else {
                     return
                 }
-                completion(.success(videoElement))
+                completion(.success(results.items.first!))
             } catch {
                 completion(.failure(APIError.failedToGetData))
             }

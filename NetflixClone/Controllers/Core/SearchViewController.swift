@@ -80,17 +80,35 @@ extension SearchViewController: UITableViewDelegate, UITableViewDataSource {
         return cell
     }
     
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        tableView.deselectRow(at: indexPath, animated: true)
-    }
-    
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 140
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: true)
+        let title = titles[indexPath.row]
+        guard let titleName = title.original_name ?? title.original_title else { return }
+        APICaller.shared.getMovie(with: titleName) { [weak self] result in
+            switch result {
+            case .success(let movie):
+                DispatchQueue.main.async {
+                    let vc = TitlePreviewViewController(model: TitlePreviewViewModel(title: titleName, youtubeView: movie, titleOverview: title.overview ?? ""))
+                    vc.navigationItem.largeTitleDisplayMode = .never
+                    vc.title = titleName
+                    self?.navigationController?.pushViewController(vc, animated: true)
+                }
+            case .failure(let error):
+                print(error.localizedDescription)
+            }
+        }
     }
 }
 
 
-extension SearchViewController: UISearchResultsUpdating {
+extension SearchViewController: UISearchResultsUpdating, SearchResultsViewControllerDelegate {
+    
+    
+    
     func updateSearchResults(for searchController: UISearchController) {
         let searchBar = searchController.searchBar
         
@@ -101,6 +119,8 @@ extension SearchViewController: UISearchResultsUpdating {
         else {
             return
         }
+        
+        resultsController.delegate = self
         
         APICaller.shared.search(with: query) { result in
             DispatchQueue.main.async {
@@ -114,6 +134,15 @@ extension SearchViewController: UISearchResultsUpdating {
             }
         }
         
+    }
+    
+    func searchResultsViewControllerDidTapItem(_ viewModel: TitlePreviewViewModel) {
+        DispatchQueue.main.async {
+            let vc = TitlePreviewViewController(model: viewModel)
+            vc.title = viewModel.title
+            vc.navigationItem.largeTitleDisplayMode = .never
+            vc.navigationController?.pushViewController(vc, animated: true)
+        }
     }
     
     
