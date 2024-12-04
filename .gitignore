@@ -8,7 +8,7 @@ NetflixClone/Resources/Constants.swift
 
 ## User settings
 xcuserdata/
-NetflixClone/NetflixCloneModel.xcdatamodeld
+NetflixClone/NetflixCloneModel.xcdatamodeld/
 
 ## Obj-C/Swift specific
 *.hmap
